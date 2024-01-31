@@ -3,10 +3,9 @@ import {Component} from "react";
 import Searchbar from "./Searchbar";
 import ImageGallery from "./ImageGallery";
 import ImageGalleryItem from "./ImageGalleryItem";
-import Btn from "./Button";
 import Loader from "./Loader";
 import Modal from "./Modal";
-import {AppWrapper} from "./App.styled"
+import {AppWrapper, ImgSmall, BtnLoader} from "./App.styled"
 
 
 axios.defaults.baseURL = 'https://pixabay.com/api/';
@@ -26,7 +25,7 @@ export class App extends Component{
   };
 handleSearch = async query => {
   try {
-    this.setState( {loading: true});
+    this.setState( {loading: true, query});
     const response = await axios.get(`?q=${query}&page=1&key=${apiKey}&per_page=${perPage}`);
     this.setState({images:response.data.hits, loading: false});
   }catch (error){
@@ -50,8 +49,9 @@ try {
 };
 };
 handleImageClick = imageURL => {
-  this.setState({showModal:true, selectedImage:imageURL})
+  this.setState({ showModal: true, selectedImage: imageURL });
 };
+
 handleCloseModal = () =>{
   this.setState({showModal:false, selectedImage: null})
 };
@@ -59,10 +59,19 @@ render(){
   return(
     <AppWrapper>
       <Searchbar onSubmit={this.handleSearch}/>
-      <ImageGallery>{this.state.images.map(image => (<ImageGalleryItem key={image.id}><img src={image.webformatURL} alt="" onClick = {() => this.handleImageClick(image.largeImageURL)}/></ImageGalleryItem>))}
-      </ImageGallery>
+      <ImageGallery>
+  {this.state.images.map((image, index) => (
+    <ImageGalleryItem key={`${image.id}-${index}`}>
+      <ImgSmall
+        src={image.webformatURL}
+        alt=""
+        onClick={() => this.handleImageClick(image.largeImageURL)}
+      />
+    </ImageGalleryItem>
+  ))}
+</ImageGallery>
       {this.state.loading && <Loader/>}
-      {this.state.images.length > 0 && (<Btn onClick={this.handleLoadMore}>Load More</Btn>)}
+      {this.state.images.length > 0 && (<BtnLoader onClick={this.handleLoadMore}>Load More</BtnLoader>)}
       {this.state.showModal && (<Modal imageURL={this.state.selectedImage} onClose={this.handleCloseModal}/>)}
     </AppWrapper>
   );

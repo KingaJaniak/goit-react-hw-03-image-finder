@@ -1,18 +1,18 @@
-import { Audio } from 'react-loader-spinner';
+import { Circles } from 'react-loader-spinner';
 import {LoaderWrapper} from './App.styled';
 
 const Loader = () => {
 return (
-<>
+
 <LoaderWrapper>
-<Audio
+<Circles
   height="80"
   width="80"
-  color="#4fa94d"
+  color="lightcoral"
   ariaLabel="blocks-loading"
   wrapperStyle={{}}
   wrapperClass="blocks-wrapper"
   visible={true}
-/></LoaderWrapper></>)};
+/></LoaderWrapper>)};
 
 export default Loader;

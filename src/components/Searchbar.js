@@ -18,7 +18,6 @@ class Searchbar extends Component {
     };
     render(){
         return (
-            <>
             <Header>
                 <Form onSubmit={this.handleSubmit}>
                     <Button><Label>Search</Label></Button>
@@ -29,7 +28,7 @@ class Searchbar extends Component {
             value={this.state.query}
             onChange={this.handleChange}/>
                 </Form>
-            </Header></>
+            </Header>
         );
     };
 };
