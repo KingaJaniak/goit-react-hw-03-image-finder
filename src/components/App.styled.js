@@ -34,3 +34,5 @@ export const Overlay = styled.div`
 
 export const Img = styled.image`
 `
+
+export const AppWrapper = styled.div

@@ -7,11 +7,11 @@ return (
 <Audio
   height="80"
   width="80"
-  radius="9"
-  color="green"
-  ariaLabel="loading"
+  color="#4fa94d"
+  ariaLabel="blocks-loading"
   wrapperStyle={{}}
-  wrapperClass
+  wrapperClass="blocks-wrapper"
+  visible={true}
 /></LoaderWrapper>)};
 
 export default Loader;

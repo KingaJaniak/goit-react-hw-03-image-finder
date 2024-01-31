@@ -6,6 +6,7 @@ import ImageGalleryItem from "./ImageGalleryItem";
 import Btn from "./Button";
 import Loader from "./Loader";
 import Modal from "./Modal";
+import {AppWrapper} from "./App.styled"
 
 
 axios.defaults.baseURL = 'https://pixabay.com/api/';
@@ -23,5 +24,47 @@ export class App extends Component{
       activePage: 1
     };
   };
-
+handleSearch = async query => {
+  try {
+    this.setState( {loading: true});
+    const response = await axios.get(`?q=${query}&page=1&key=${apiKey}&per_page=${perPage}`);
+    this.setState({images:response.data.hits, loading: false});
+  }catch (error){
+    console.error("Error fetching images:", error);
+    this.setState({loading:false});
+  };
+};
+handleLoadMore = async () => {
+try { 
+  this.setState({loading: true});
+  const nextPage = Math.ceil(this.state.images.length/perPage) + 1;
+  const response = await axios.get(`?q=${this.state.query}&page=${nextPage}&key=${apiKey}&per_page=${perPage}`);
+  const newImages = response.data.hits;
+  this.setState(prevState => ({
+    images: [...prevState.images, ...newImages],
+    loading: false
+  }));
+} catch (error){
+  console.error("Error fetching more images:", error);
+  this.setState({loading:false});
+};
+};
+handleImageClick = imageURL => {
+  this.setState({showModal:true, selectedImage:imageURL})
+};
+handleCloseModal = () =>{
+  this.setState({showModal:false, selectedImage: null})
+};
+render(){
+  return(
+    <AppWrapper>
+      <Searchbar onSubmit={this.handleSearch}/>
+      <ImageGallery>{this.state.images.map(image => (<ImageGalleryItem key={image.id}><img src={image.webformatURL} alt="" onClick = {() => this.handleImageClick(image.largeImageURL)}/></ImageGalleryItem>))}
+      </ImageGallery>
+      {this.state.loading && <Loader/>};
+      {this.state.images.length > 0 && (<Btn onClick={this.handleLoadMore}>Load More</Btn>)};
+      {this.state.showModal && (<Modal imageURL={this.state.selectedImage} onClose={this.handleCloseModal}/>)};
+    </AppWrapper>
+  );
+};
 };
