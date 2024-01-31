@@ -3,7 +3,7 @@ import {LiList} from "./App.styled"
 
 class ImageGalleryItem extends Component {
     render () {
-        return <LiList>{this.props.children}</LiList>
+        return <><LiList>{this.props.children}</LiList></>
     };
 };
 

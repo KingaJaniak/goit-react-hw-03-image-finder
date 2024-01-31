@@ -3,7 +3,7 @@ import {UlList} from "./App.styled"
 
 class ImageGallery extends Component {
     render () {
-        return <UlList>{this.props.children}</UlList>
+        return <><UlList>{this.props.children}</UlList></>
     };
 };
 

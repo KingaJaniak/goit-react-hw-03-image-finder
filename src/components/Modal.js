@@ -3,12 +3,12 @@ import {ModalWrapper, Overlay, Img} from "./App.styled"
 
 class Modal extends Component {
     render(){
-        return (
+        return (<>
             <Overlay onClick={this.props.onClose}>
                 <ModalWrapper>
                     <Img src={this.props.imageURL} alt=""/>
                 </ModalWrapper>
-            </Overlay>
+            </Overlay></>
         );
     };
 };

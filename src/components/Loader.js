@@ -3,6 +3,7 @@ import {LoaderWrapper} from './App.styled';
 
 const Loader = () => {
 return (
+<>
 <LoaderWrapper>
 <Audio
   height="80"
@@ -12,6 +13,6 @@ return (
   wrapperStyle={{}}
   wrapperClass="blocks-wrapper"
   visible={true}
-/></LoaderWrapper>)};
+/></LoaderWrapper></>)};
 
 export default Loader;

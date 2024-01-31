@@ -61,9 +61,9 @@ render(){
       <Searchbar onSubmit={this.handleSearch}/>
       <ImageGallery>{this.state.images.map(image => (<ImageGalleryItem key={image.id}><img src={image.webformatURL} alt="" onClick = {() => this.handleImageClick(image.largeImageURL)}/></ImageGalleryItem>))}
       </ImageGallery>
-      {this.state.loading && <Loader/>};
-      {this.state.images.length > 0 && (<Btn onClick={this.handleLoadMore}>Load More</Btn>)};
-      {this.state.showModal && (<Modal imageURL={this.state.selectedImage} onClose={this.handleCloseModal}/>)};
+      {this.state.loading && <Loader/>}
+      {this.state.images.length > 0 && (<Btn onClick={this.handleLoadMore}>Load More</Btn>)}
+      {this.state.showModal && (<Modal imageURL={this.state.selectedImage} onClose={this.handleCloseModal}/>)}
     </AppWrapper>
   );
 };
