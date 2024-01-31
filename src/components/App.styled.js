@@ -25,3 +25,12 @@ export const UlList = styled.ul`
 
 export const LiList = styled.li`
 `
+
+export const ModalWrapper = styled.div`
+`
+
+export const Overlay = styled.div`
+`
+
+export const Img = styled.image`
+`
