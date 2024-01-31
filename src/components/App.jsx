@@ -12,7 +12,7 @@ axios.defaults.baseURL = 'https://pixabay.com/api/';
 const apiKey = '41181454-8b56e64d19cc61326c145b8db';
 const perPage = 12;
 
-class App extends Component{
+export class App extends Component{
   constructor(props){
     super(props);
     this.state = {
